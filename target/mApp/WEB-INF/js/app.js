@@ -92,10 +92,22 @@
         //Constants
 
         //Fields
+        vm.center = {};
+        vm.zoom = 15;
+
         vm.message = "";
 
         //Methods
         vm.addCoordinates = addCoordinates;
+
+        activate();
+
+        function activate() {
+            vm.center.latitude = 44.435730;
+            vm.center.longitude = 26.048109;
+
+            vm.zoom = 15;
+        }
 
         function addCoordinates() {
             var coordiates = {};
@@ -131,7 +143,7 @@
 		};
 
 		function addCoordinates(data) {
-			return handleRequest('http://localhost:8080/insert', data);
+			return handleRequest('http://localhost:8090/mApp/insert', data);
 		}
 
 		function handleRequest(url, data) {

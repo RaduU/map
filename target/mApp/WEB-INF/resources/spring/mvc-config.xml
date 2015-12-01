@@ -11,7 +11,6 @@
 		xmlns:tx="http://www.springframework.org/schema/tx">
 		
 	<mvc:annotation-driven />
-
 	<mvc:resources mapping="/**" location="/WEB-INF/" />
 	<mvc:view-controller path="/" view-name="/resources/index.html"/>
 		
@@ -19,8 +18,5 @@
 	        <property name="prefix" value="/WEB-INF/"/>
 	        <property name="suffix" value=".html"/>
 	</bean>
-
-	<!--<context:property-placeholder ignore-unresolvable="true" ignore-resource-not-found="true" order="1"  location="/WEB-INF/config/config.${config.env:default}.properties" />	-->
-	<!--<context:property-placeholder location="/WEB-INF/config/config.properties" order="2" local-override="false" />-->
 
 </beans>

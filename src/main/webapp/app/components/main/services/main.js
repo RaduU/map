@@ -13,7 +13,7 @@
 		};
 
 		function addCoordinates(data) {
-			return handleRequest('http://localhost:8080/insert', data);
+			return handleRequest('http://localhost:8090/mApp/insert', data);
 		}
 
 		function handleRequest(url, data) {
