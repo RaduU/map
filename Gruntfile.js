@@ -45,9 +45,9 @@ module.exports = function(grunt) {
       },
       img: {
         expand: true,
-        cwd: '<%= folders.webapp.root %>/img/',
+        cwd: '<%= folders.webapp.root %>/images/',
         src: ['**/**/*'],
-        dest: '<%= folders.webapp.build %>img/'
+        dest: '<%= folders.webapp.build %>images/'
       },
       templates: {
         expand: true,

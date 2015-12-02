@@ -25,12 +25,12 @@
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
-	<!--<mvc:resources mapping="/**" location="/WEB-INF/" />-->
-	<!--<mvc:view-controller path="/" view-name="/resources/index.html"/>-->
+	<mvc:resources mapping="/**" location="/WEB-INF/" />
+	<mvc:view-controller path="/" view-name="/resources/index.html"/>
 		
-	<!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">-->
-	        <!--<property name="prefix" value="/WEB-INF/"/>-->
-	        <!--<property name="suffix" value=".html"/>-->
-	<!--</bean>-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+	        <property name="prefix" value="/WEB-INF/"/>
+	        <property name="suffix" value=".html"/>
+	</bean>
 
 </beans>

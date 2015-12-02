@@ -65,8 +65,8 @@
 
         function addCoordinates() {
             var coordiates = {};
-            coordiates.latitude = "44";
-            coordiates.longitude = "26";
+            coordiates.latitude =  vm.marker.coords.latitude;
+            coordiates.longitude = vm.marker.coords.longitude;
 
             MainService
                 .addCoordinates(coordiates)

@@ -1,16 +1,46 @@
-<div id="map">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">
-    <!--<ui-gmap-google-map center="map.marker.coords" zoom="map.zoom" events="map.events">-->
-        <ui-gmap-marker ng-repeat="coords in map.markers" coords="coords" idkey="map.marker.key" events="map.marker.events">
-        <!--<ui-gmap-marker models="map.marker" coords="map.marker.coords" idkey="map.marker.key">-->
+<!--<div id="map" class="mapContainer">-->
+    <!--<ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">-->
+    <!--&lt;!&ndash;<ui-gmap-google-map center="map.marker.coords" zoom="map.zoom" events="map.events">&ndash;&gt;-->
+        <!--<ui-gmap-marker ng-repeat="coords in map.markers" coords="coords" idkey="map.marker.key" events="map.marker.events">-->
+        <!--&lt;!&ndash;<ui-gmap-marker models="map.marker" coords="map.marker.coords" idkey="map.marker.key">&ndash;&gt;-->
 
-        </ui-gmap-marker>
-    </ui-gmap-google-map>
+        <!--</ui-gmap-marker>-->
+    <!--</ui-gmap-google-map>-->
+<!--</div>-->
+<!--<div>-->
+    <!--Latitudine: <input type="text" name="latitude" ng-model="map.marker.coords.latitude"/>-->
+    <!--<br>-->
+    <!--Longitudine: <input type="text" name="longitude" ng-model="map.marker.coords.longitude"/>-->
+    <!--<br>-->
+    <!--<button type="button" ng-click="map.addCoordinates()">Add</button>-->
+    <!--{{map.message}}-->
+<!--</div>-->
 
-    Latitudine: <input type="text" name="latitude" ng-model="map.marker.coords.latitude"/>
-    <br>
-    Longitudine: <input type="text" name="longitude" ng-model="map.marker.coords.longitude"/>
-    <br>
-    <button type="button" ng-click="map.addCoordinates()">Add</button>
-    {{map.message}}
+<div class="clear"></div>
+<div class="banner-wrapper">
+    <div class="banner">
+        <div class="banner-image">
+            <div id="mapContainer">
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">
+                    <!--<ui-gmap-google-map center="map.marker.coords" zoom="map.zoom" events="map.events">-->
+                    <ui-gmap-marker ng-repeat="coords in map.markers" coords="coords" idkey="map.marker.key" events="map.marker.events">
+                        <!--<ui-gmap-marker models="map.marker" coords="map.marker.coords" idkey="map.marker.key" events="map.marker.events">-->
+
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+            <div class="formContainer">
+                Latitudine: <input type="text" name="latitude" ng-model="map.marker.coords.latitude"/>
+                <br>
+                Longitudine: <input type="text" name="longitude" ng-model="map.marker.coords.longitude"/>
+                <br>
+                <button class="button" type="button" ng-click="map.addCoordinates()">Add</button>
+                {{map.message}}
+            </div>
+        </div>
+        <!---banner-image ends here-->
+    </div>
+    <!---bannerends here-->
 </div>
+<!---banner-wrapper ends here-->
+<div class="clear"></div>

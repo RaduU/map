@@ -144,8 +144,8 @@
 
         function addCoordinates() {
             var coordiates = {};
-            coordiates.latitude = "44";
-            coordiates.longitude = "26";
+            coordiates.latitude =  vm.marker.coords.latitude;
+            coordiates.longitude = vm.marker.coords.longitude;
 
             MainService
                 .addCoordinates(coordiates)
@@ -196,7 +196,8 @@
 			var deferred = $q.defer();
 
 			$http
-				.post(getBaseURL() + url, data)
+//				.post(getBaseURL() + url, data)
+				.post("http://localhost:8090/mApp" + url, data)
 				.success(function(data, status, headers, config) {
 					deferred.resolve(data);
 				})
@@ -210,15 +211,15 @@
 		return service;
 	}
 
-	function getBaseURL() {
-		var baseURL = $location.absUrl();
-
-		if (baseURL.lastIndexOf('/') == baseURL.length - 1) {
-			return baseURL.substring(0, baseURL.length - 1);
-		}
-
-		return baseURL;
-	}
+//	function getBaseURL() {
+//		var baseURL = $location.absUrl();
+//
+//		if (baseURL.lastIndexOf('/') == baseURL.length - 1) {
+//			return baseURL.substring(0, baseURL.length - 1);
+//		}
+//
+//		return baseURL;
+//	}
 	
 })();
 (function() {

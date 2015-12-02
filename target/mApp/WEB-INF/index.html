@@ -16,22 +16,67 @@
   <!-- endbuild -->
 </head>
 <body ng-app="app">
-<!--[if lte IE 8]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 
 <!-- Add your site or application content here -->
-<div class="header">
-  header
+<div class="header-wrapper">
+  <div class="header">
+    <div class="logo">
+      <h1>Google Maps</h1>
+    </div>
+    <!---logo ends here -->
+    <div class="menu">
+      <ul>
+        <li><a class="active" href="#">Home</a>me</li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Solutions</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <!--- menu ends here -->
+  </div>
+  <!---headerends here -->
 </div>
+<!---header-wrapper-ends here -->
 
 <div class="container">
   <div ng-view=""></div>
 </div>
 
-<div class="footer">
-  &#169; mApp
+<div class="footer-wrapper">
+  <div class="footer">
+    <div class="footer-content">
+      <h1>Nisi ut aliquid</h1>
+      <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem ldantium, ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
+      <a href="#" class="more1">More</a>
+    </div>
+    <div class="footer-content">
+      <h1>Obcaecati cupiditate</h1>
+      <ul>
+        <li><a href="#">Vestibulum at lacus quis ante tristique facili</a></li>
+        <li><a href="#">Morbi ac dolor sed risus sollicitudin eleife</a></li>
+        <li><a href="#">Nullam eget risus eu leo consectetur</a></li>
+        <li><a href="#">Nullam molestie turpis ut est viverra sit</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-content">
+      <h1>Excepturi sint</h1>
+
+      <div class="newsletter">
+
+        <input name="" type="text" class="newsletter-input"/>
+        <a href="#"><img src="images/btn-subscribe.gif" /></a>        </div>
+
+      &#169; mApp<br />
+
+      <a href="http://alltemplateneeds.com" class="footerlink">www.alltemplateneeds.com </a>    <br />
+
+      Images From: <a href="#" class="footerlink">www.photorack.net</a>
+    </div>
+  </div>
 </div>
+<!---footer-wrapper ends here-->
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->

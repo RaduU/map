@@ -1,6 +1,6 @@
-d:\rursu\IdeaProjects\gMap\map\src\main\java\com\map\app\service\CoordinatesService.java
-d:\rursu\IdeaProjects\gMap\map\src\main\java\com\map\app\DAO\CoordinatesDAO.java
-d:\rursu\IdeaProjects\gMap\map\src\main\java\com\map\app\DAO\Impl\CoordinatesDAOImpl.java
-d:\rursu\IdeaProjects\gMap\map\src\main\java\com\map\app\controller\ApplicationController.java
-d:\rursu\IdeaProjects\gMap\map\src\main\java\com\map\app\entities\Coordinates.java
-d:\rursu\IdeaProjects\gMap\map\src\main\java\com\map\app\service\Impl\CoordinatesServiceImpl.java
+E:\Cursuri\Master\Cercetare\Maps\map\src\main\java\com\map\app\service\CoordinatesService.java
+E:\Cursuri\Master\Cercetare\Maps\map\src\main\java\com\map\app\DAO\Impl\CoordinatesDAOImpl.java
+E:\Cursuri\Master\Cercetare\Maps\map\src\main\java\com\map\app\entities\Coordinates.java
+E:\Cursuri\Master\Cercetare\Maps\map\src\main\java\com\map\app\DAO\CoordinatesDAO.java
+E:\Cursuri\Master\Cercetare\Maps\map\src\main\java\com\map\app\service\Impl\CoordinatesServiceImpl.java
+E:\Cursuri\Master\Cercetare\Maps\map\src\main\java\com\map\app\controller\ApplicationController.java
