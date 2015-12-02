@@ -26,10 +26,9 @@ public class ApplicationController {
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		return "Merge!";
+		return "{\"test\": \"Merge!\"}";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
 		return "welcome!";
 	}

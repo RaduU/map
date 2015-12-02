@@ -89,7 +89,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="D:\JAVA\IdeaProjects\Maps\target/MANIFEST.MF" />
+        <element id="file-copy" path="D:\rursu\IdeaProjects\gMap\map\target/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="mApp/web/Web" />
     </root>

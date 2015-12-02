@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:17:59:30 +0200] "GET /mApp/js/lib.js HTTP/1.1" 404 979 http-bio-8090-exec-2 75
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:17:59:30 +0200] "GET /mApp/style/main.css HTTP/1.1" 304 - http-bio-8090-exec-1 76
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:17:59:30 +0200] "GET /mApp/js/app.js HTTP/1.1" 404 979 http-bio-8090-exec-3 82
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:17:59:36 +0200] "GET /mApp/test/ HTTP/1.1" 200 35 http-bio-8090-exec-6 34
