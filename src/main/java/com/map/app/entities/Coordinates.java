@@ -13,10 +13,21 @@ public class Coordinates {
     private int id;
     private String latitude;
     private String longitude;
+    private String name;
+    private String description;
+    private String city;
 
     public Coordinates(String latitude, String longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public Coordinates(String latitude, String longitude, String name, String description, String city) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.name = name;
+        this.description = description;
+        this.city = city;
     }
 
     public Coordinates() {
@@ -44,5 +55,29 @@ public class Coordinates {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

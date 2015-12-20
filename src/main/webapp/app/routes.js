@@ -19,10 +19,15 @@
 				controller:	'MapCtrl',
 				controllerAs: 'map'
 			}).
-			when('/inserted', {
-				templateUrl: 'pages/map/inserted.html',
-				controller:	'InsertedCtrl',
-				controllerAs: 'added'
+			when('/login', {
+				templateUrl: 'pages/map/login.html',
+				controller:	'LogInCtrl',
+				controllerAs: 'login'
+			}).
+			when('/register', {
+				templateUrl: 'pages/map/register.html',
+				controller:	'RegisterCtrl',
+				controllerAs: 'reg'
 			}).
 	         otherwise({
 	           redirectTo: '/'

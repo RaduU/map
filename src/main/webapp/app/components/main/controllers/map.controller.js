@@ -33,6 +33,7 @@
          ];
 
         vm.message = "";
+        vm.cssClass = "ok";
 
         //Methods
         vm.addCoordinates = addCoordinates;
@@ -50,8 +51,17 @@
                     latitude: 44.435730,
                     longitude: 26.048109
                 },
+                name: '',
+                description: '',
+                city: '',
+
                 key: 1,
                 events: {
+                    click: function (gMarker, eventName, model) {
+                          console.debug('mouseover');
+                          model.doShow = true;
+//                          $scope.$apply();
+                    },
                     rightclick : function (gMarker, eventName, model) {
                         //window.alert("Marker: lat: " + model.coords.latitude + ", lon: " + model.coords.longitude + " clicked!!")
                         removeMarker(model.coords.latitude, model.coords.longitude);
@@ -67,6 +77,9 @@
             var coordiates = {};
             coordiates.latitude =  vm.marker.coords.latitude;
             coordiates.longitude = vm.marker.coords.longitude;
+            coordiates.name = vm.marker.name;
+            coordiates.description = vm.marker.description;
+            coordiates.city = vm.marker.city;
 
             MainService
                 .addCoordinates(coordiates)
@@ -74,11 +87,13 @@
         }
 
         function onAddComplete(response) {
-            vm.message = response;
+            vm.message = "Datele au fost salvate cu succes in baza de date!";
+            vm.cssClass = "ok";
         }
 
         function onAddError() {
-            vm.message = "error";
+            vm.message = "A aparut o eroare la salvarea datelor in baza de date!";
+            vm.cssClass = "error";
         }
 
         function removeMarker(latitude, longitude) {

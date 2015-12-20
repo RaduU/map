@@ -190,3 +190,14 @@
 0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:04:37 +0200] "GET /mApp/images/nav-div.jpg HTTP/1.1" 304 - http-bio-8090-exec-8 4
 0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:04:37 +0200] "GET /mApp/js/lib.js HTTP/1.1" 200 4133364 http-bio-8090-exec-4 285
 0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:04:38 +0200] "GET /mApp/pages/map/map.html HTTP/1.1" 200 2327 http-bio-8090-exec-4 5
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/ HTTP/1.1" 304 - http-bio-8090-exec-1 107
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/images/btn-subscribe.gif HTTP/1.1" 304 - http-bio-8090-exec-2 9
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/style/main.css HTTP/1.1" 200 5409 http-bio-8090-exec-3 30
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/js/app.js HTTP/1.1" 200 5804 http-bio-8090-exec-6 6
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/images/body-bg.jpg HTTP/1.1" 304 - http-bio-8090-exec-8 26
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/images/nav-div.jpg HTTP/1.1" 304 - http-bio-8090-exec-10 16
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/images/bg-2.jpg HTTP/1.1" 304 - http-bio-8090-exec-7 35
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/images/footer-div.jpg HTTP/1.1" 304 - http-bio-8090-exec-9 32
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/images/bg-1.jpg HTTP/1.1" 304 - http-bio-8090-exec-5 47
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:02 +0200] "GET /mApp/js/lib.js HTTP/1.1" 200 4133364 http-bio-8090-exec-4 215
+0:0:0:0:0:0:0:1 - - [02/Dec/2015:22:25:03 +0200] "GET /mApp/pages/map/map.html HTTP/1.1" 200 2327 http-bio-8090-exec-4 18
