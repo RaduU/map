@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CoordinatesDAOImpl implements CoordinatesDAO {
 
@@ -15,5 +17,11 @@ public class CoordinatesDAOImpl implements CoordinatesDAO {
     @Override
     public void insert(Coordinates coordinates) {
         sessionFactory.getCurrentSession().saveOrUpdate(coordinates);
+    }
+
+    @Override
+    public List<Coordinates> getAllCoordinates() {
+        List<Coordinates> coordinatesList = sessionFactory.getCurrentSession().createCriteria(Coordinates.class).list();
+        return coordinatesList;
     }
 }

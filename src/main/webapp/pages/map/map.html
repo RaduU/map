@@ -27,7 +27,9 @@
                         <!--<ui-gmap-marker models="map.marker" coords="map.marker.coords" idkey="map.marker.key" events="map.marker.events">-->
                         <ui-gmap-window>
                             <div>
-                                Normal Standalone Window (No show state)
+                                <div>Nume: {{map.markerDetails.marker.name}}</div>
+                                <div>Oras: {{map.markerDetails.marker.city}}</div>
+                                <div>Descriere: {{map.markerDetails.marker.description}}</div>
                             </div>
                         </ui-gmap-window>
                     </ui-gmap-marker>

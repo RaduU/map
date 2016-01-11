@@ -109,16 +109,18 @@
                 var e = originalEventArgs[0];
                 vm.marker.coords = {latitude: e.latLng.lat(), longitude: e.latLng.lng()};
                 vm.markers.push({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
+                var attributes = {};
+                attributes.marker = {latitude: e.latLng.lat(), longitude: e.latLng.lng()};
+                attributes.canDelete = true;
+                vm.markersAttributes.push(attributes);
                 $scope.$apply();
             }
         };
 
-        vm.markers = [
-             {
-                 latitude: 44.435730,
-                 longitude: 26.048109
-             }
-         ];
+        vm.markers = [];
+        vm.markersAttributes = [];
+
+        vm.markerDetails = {};
 
         vm.message = "";
         vm.cssClass = "ok";
@@ -147,6 +149,8 @@
                 events: {
                     click: function (gMarker, eventName, model) {
                           console.debug('mouseover');
+                        vm.markerDetails = {};
+                            vm.markerDetails = getMarkerDetails(model.coords);
                           model.doShow = true;
 //                          $scope.$apply();
                     },
@@ -159,6 +163,43 @@
             };
 
             vm.zoom = 15;
+
+            MainService
+                .getAllCoordinates()
+                .then(onLoadComplete, onLoadError);
+        }
+
+        function onLoadComplete (response) {
+            if(response.length > 0) {
+                var marker = {};
+                var attributes = {};
+                for (var i = 0; i < response.length; i++) {
+                    marker = {};
+                    attributes = {};
+                    marker.latitude = response[i].latitude;
+                    marker.longitude = response[i].longitude;
+                    vm.markers.push(marker);
+
+                    attributes.marker = response[i];
+                    attributes.canDelete = false;
+                    vm.markersAttributes.push(attributes);
+                }
+            } else {
+                vm.markers = [
+                    {
+                        latitude: 44.435730,
+                        longitude: 26.048109
+                    }
+                ];
+                var attributes = {};
+                attributes.marker = vm.markers[0];
+                attributes.canDelete = true;
+                vm.markersAttributes.push(attributes);
+            }
+        }
+
+        function onLoadError(response) {
+
         }
 
         function addCoordinates() {
@@ -192,9 +233,21 @@
                 }
             }
 
-            if(index != -1) {
+            if(index != -1 && vm.markersAttributes[index].canDelete) {
                 vm.markers.splice(index, 1);
+                vm.markersAttributes.splice(index, 1);
             }
+        }
+
+        function getMarkerDetails(coordinates) {
+            var latitude = coordinates.latitude;
+            var longitude = coordinates.longitude;
+            for(var i = 0; i < vm.markersAttributes.length; i++) {
+                if(vm.markersAttributes[i].marker.latitude === latitude && vm.markersAttributes[i].marker.longitude === longitude) {
+                    return vm.markersAttributes[i];
+                }
+            }
+            return null;
         }
     }
 })();
@@ -239,11 +292,16 @@
 	function MainService($http, $q, $location) {
 
 		var service = {
-			addCoordinates: addCoordinates
+			addCoordinates: addCoordinates,
+			getAllCoordinates: getAllCoordinates
 		};
 
 		function addCoordinates(data) {
 			return handleRequest('/insert', data);
+		}
+
+		function getAllCoordinates() {
+			return handleRequest('/all');
 		}
 
 		function handleRequest(url, data) {

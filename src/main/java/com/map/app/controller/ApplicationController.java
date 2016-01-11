@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/")
 public class ApplicationController {
@@ -21,6 +24,17 @@ public class ApplicationController {
 //		Coordinates newCoordinates = new Coordinates(coordinates.getLatitude(), coordinates.getLongitude());
 		coordinatesService.insert(newCoordinates);
 		return newCoordinates;
+	}
+
+	@RequestMapping(value = "/all", method = RequestMethod.POST)
+	public List<Coordinates> getAllCoordinates() {
+		List<Coordinates> coordinatesList = new ArrayList<>();
+		try {
+			coordinatesList = coordinatesService.getAllCoordinates();
+		} catch (Error e) {
+
+		}
+		return coordinatesList;
 	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
