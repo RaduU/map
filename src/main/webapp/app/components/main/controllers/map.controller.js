@@ -5,15 +5,19 @@
         .module('app')
         .controller('MapCtrl', MapCtrl);
 
-    MapCtrl.$inject = ['$scope', 'MainService'];
-    function MapCtrl($scope, MainService) {
+    MapCtrl.$inject = ['$scope', '$location', '$localStorage', 'MainService', 'commonService'];
+    function MapCtrl($scope, $location, $localStorage, MainService, commonService) {
 
         var vm = this;
 
         //Constants
 
         //Fields
-        vm.center = {};
+        $scope.$storage = $localStorage;
+        vm.center = {
+            latitude: 44.435730,
+            longitude: 26.048109
+        };
         vm.zoom = 15;
         vm.marker = {};
         vm.events = {
@@ -43,42 +47,46 @@
         activate();
 
         function activate() {
-            vm.center = {
-                latitude: 44.435730,
-                longitude: 26.048109
-            };
-
-            vm.marker = {
-                coords: {
+            if(!commonService.isUserLogged()) {
+                $location.path("/login");
+            } else {
+                vm.center = {
                     latitude: 44.435730,
                     longitude: 26.048109
-                },
-                name: '',
-                description: '',
-                city: '',
+                };
 
-                key: 1,
-                events: {
-                    click: function (gMarker, eventName, model) {
-                          console.debug('mouseover');
-                        vm.markerDetails = {};
-                            vm.markerDetails = getMarkerDetails(model.coords);
-                          model.doShow = true;
-//                          $scope.$apply();
+                vm.marker = {
+                    coords: {
+                        latitude: 44.435730,
+                        longitude: 26.048109
                     },
-                    rightclick : function (gMarker, eventName, model) {
-                        //window.alert("Marker: lat: " + model.coords.latitude + ", lon: " + model.coords.longitude + " clicked!!")
-                        removeMarker(model.coords.latitude, model.coords.longitude);
-                        $scope.$apply();
+                    name: '',
+                    description: '',
+                    city: '',
+
+                    key: 1,
+                    events: {
+                        click: function (gMarker, eventName, model) {
+                              console.debug('mouseover');
+                              vm.markerDetails = {};
+                              vm.markerDetails = getMarkerDetails(model.coords);
+                              model.doShow = true;
+    //                          $scope.$apply();
+                        },
+                        rightclick : function (gMarker, eventName, model) {
+                            //window.alert("Marker: lat: " + model.coords.latitude + ", lon: " + model.coords.longitude + " clicked!!")
+                            removeMarker(model.coords.latitude, model.coords.longitude);
+                            $scope.$apply();
+                        }
                     }
-                }
-            };
+                };
 
-            vm.zoom = 15;
+                vm.zoom = 15;
 
-            MainService
-                .getAllCoordinates()
-                .then(onLoadComplete, onLoadError);
+                MainService
+                    .getAllCoordinates()
+                    .then(onLoadComplete, onLoadError);
+            }
         }
 
         function onLoadComplete (response) {

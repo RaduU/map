@@ -9,11 +9,26 @@
 	function MainService($http, $q, $location) {
 
 		var service = {
-			addCoordinates: addCoordinates
+			addCoordinates: addCoordinates,
+			getAllCoordinates: getAllCoordinates,
+			authenticate: authenticate,
+			addUser: addUser
 		};
 
 		function addCoordinates(data) {
-			return handleRequest('/insert', data);
+			return handleRequest('/coordinates/insert', data);
+		}
+
+		function getAllCoordinates() {
+			return handleRequest('/coordinates/all');
+		}
+
+		function authenticate(data) {
+			return handleRequest('/user/authenticate', data);
+		}
+
+		function addUser(data) {
+			return handleRequest('/user/insert', data);
 		}
 
 		function handleRequest(url, data) {

@@ -75,7 +75,7 @@ a {
 	width:100%;
 	height:90px;
 }
-.menu li a.active {
+.menu li a:active {
 	background:url(../images/bg-1.jpg) repeat-x;
 	font-size:15px;
 	font-weight:bold;
@@ -98,9 +98,8 @@ a {
 }
 .banner-image {
 	width:950px;
-	height:550px;
-	padding-left:10px;
-	padding-top:10px;
+	height:625px;
+	padding:10px;
 	background:#d0d0c5;
 	margin-top:60px;
 	margin-bottom:60px;
@@ -122,8 +121,7 @@ a {
 }
 .content-1 h1 {
 	font-size:25px;
-	font-w
-	color:#41403b;
+	font-color:#41403b;
 	padding-bottom:20px;
 }
 .content-1-image {
@@ -304,4 +302,57 @@ color:#41403b;
   width: 100%;
   height: 450px;
   margin: 0px auto;
+}
+
+.formContainer{
+	padding: 10px;
+}
+
+.button {
+	display:block;
+	color:#ffffff;
+	text-align:center;
+	background:url(../images/bg-2.jpg);
+	width:80px;
+	height:30px;
+	line-height:30px;
+	margin-top:15px;
+	border: 0px;
+}
+
+.button:hover{
+	background:url(../images/bg-1.jpg);
+	color:#41403b;
+}
+.ok{
+	color: #00AA00;
+}
+
+.error{
+	color: #FF0000;
+}
+.login {
+	width:260px;
+	margin:0 auto;
+}
+
+.login-background {
+	width:240px;
+	height:100px;
+	padding:10px;
+	background:#d0d0c5;
+	margin-top:60px;
+	margin-bottom:60px;
+}
+
+.register-background {
+	width:240px;
+	height:175px;
+	padding:10px;
+	background:#d0d0c5;
+	margin-top:60px;
+	margin-bottom:60px;
+}
+a.createLink {
+	text-decoration: underline;
 }

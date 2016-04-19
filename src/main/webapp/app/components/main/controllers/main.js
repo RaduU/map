@@ -5,10 +5,11 @@
 		.module('app')
 		.controller('MainCtrl', MainCtrl);
 
-	MainCtrl.$inject = ['$window', 'MainService'];
-	function MainCtrl($window, MainService) {
+	MainCtrl.$inject = ['$scope', '$localStorage'];
+	function MainCtrl($scope, $localStorage) {
 
 		var vm = this;
+		$scope.$storage = $localStorage;
 
 		vm.viewLocation = 'webapp/templates/main/main.html';
 

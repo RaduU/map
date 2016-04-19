@@ -24,18 +24,48 @@
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">
                     <!--<ui-gmap-google-map center="map.marker.coords" zoom="map.zoom" events="map.events">-->
                     <ui-gmap-marker ng-repeat="coords in map.markers" coords="coords" idkey="map.marker.key" events="map.marker.events">
-                        <!--<ui-gmap-marker models="map.marker" coords="map.marker.coords" idkey="map.marker.key">-->
-
+                        <!--<ui-gmap-marker models="map.marker" coords="map.marker.coords" idkey="map.marker.key" events="map.marker.events">-->
+                        <ui-gmap-window>
+                            <div>
+                                <div>Nume: {{map.markerDetails.marker.name}}</div>
+                                <div>Oras: {{map.markerDetails.marker.city}}</div>
+                                <div>Descriere: {{map.markerDetails.marker.description}}</div>
+                            </div>
+                        </ui-gmap-window>
                     </ui-gmap-marker>
                 </ui-gmap-google-map>
             </div>
-            <div>
-                Latitudine: <input type="text" name="latitude" ng-model="map.marker.coords.latitude"/>
-                <br>
-                Longitudine: <input type="text" name="longitude" ng-model="map.marker.coords.longitude"/>
-                <br>
-                <button type="button" ng-click="map.addCoordinates()">Add</button>
-                {{map.message}}
+            <div class="formContainer">
+                <table border="0">
+                    <tr>
+                        <td>Latitudine:</td>
+                        <td><input type="text" name="latitude" ng-model="map.marker.coords.latitude"/></td>
+                    </tr>
+                    <tr>
+                        <td>Longitudine:</td>
+                        <td><input type="text" name="longitude" ng-model="map.marker.coords.longitude"/></td>
+                    </tr>
+                    <tr>
+                        <td>Nume:</td>
+                        <td><input type="text" name="name" ng-model="map.marker.name"/></td>
+                    </tr>
+                    <tr>
+                        <td>Descriere:</td>
+                        <td><input type="text" name="description" ng-model="map.marker.description"/></td>
+                    </tr>
+                    <tr>
+                        <td>Oras:</td>
+                        <td><input type="text" name="city" ng-model="map.marker.city"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button class="button" type="button" ng-click="map.addCoordinates()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="{{map.cssClass}}">{{map.message}}</div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <!---banner-image ends here-->
@@ -43,79 +73,4 @@
     <!---bannerends here-->
 </div>
 <!---banner-wrapper ends here-->
-<div class="clear"></div>
-<div class="conainer">
-    <div class="content-1 marginRight" >
-        <h1>Civamus eget mauris</h1>
-        <div class="content-1-image"> <img src="images/img-1.jpg" alt="img" /> </div>
-        <!---content-1-image ends here-->
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
-        <a href="#" class="more" >More</a>
-    </div>
-    <div class="content-1 marginRight">
-        <h1>Quisquam est qui</h1>
-        <div class="content-1-image"> <img src="images/img-1.jpg" alt="img" /> </div>
-        <!---content-1-image ends here-->
-        <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia </p>
-        <a href="#" class="more" >More</a>
-    </div>
-    <div class="content-1">
-        <h1>Consectetur adipisi</h1>
-        <div class="content-1-image"> <img src="images/img-1.jpg" alt="img" /> </div>
-        <!---content-1-image ends here-->
-        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas</p>
-        <a href="#" class="more" >More</a>
-    </div>
-    <!---content-1 ends here-->
-</div>
-<!---container ends here-->
-<div class="clear"></div>
-<div class="conainer">
-    <div class="content-2" >
-        <h1>Sed ut perspiciatis unde omnis iste natus !</h1>
-        <div class="div1">
-            <img src="images/img-4.jpg" />
-        </div>
-        <div class="div2">
-            <ul>
-                <li><a href="#">Lorem ipsum dolor sit amet</a>
-                    <p>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </li>
-
-                <li><a href="#">Voluptatem accusantium </a>
-                    <p>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                </li>
-
-                <li class="bdrBottom"><a href="#">Eiusmod tempor incididunt ut</a>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                </li>
-            </ul>
-
-
-        </div>
-    </div>
-    <!---content-2 ends here-->
-    <div class="content-3">
-        <h1>Cum quia dolor</h1>
-        <ul>
-            <li>
-                <h2>John Says</h2>
-                <p>qui blanditiis praesentium Proin consequat libero vel ipsum tincidunt quis accumsan nibh faucibus.</p>
-            </li>
-
-            <li>
-                <h2>Amenda Says</h2>
-                <p>qui blanditiis praesentium Proin consequat libero vel ipsum tincidunt quis accumsan nibh faucibus.</p>
-            </li>
-
-            <li>
-                <h2>Smith Says</h2>
-                <p>qui blanditiis praesentium Proin consequat libero vel ipsum tincidunt quis accumsan nibh faucibus.</p>
-            </li>
-        </ul>
-    </div>
-</div>
-<!---content-3 ends here-->
-</div>
-<!---container ends here-->
 <div class="clear"></div>

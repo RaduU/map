@@ -9,29 +9,34 @@
     function Routes($routeProvider) {
 
     	$routeProvider.
-	    	 when('/', {
-	    	   templateUrl: 'pages/main/main.html',
-	    	   controller:	'MainCtrl',
-	           controllerAs: 'main'
-	       	 }).
-			when('/map', {
-				templateUrl: 'pages/map/map.html',
-				controller:	'MapCtrl',
-				controllerAs: 'map'
-			}).
 			when('/login', {
 				templateUrl: 'pages/map/login.html',
 				controller:	'LogInCtrl',
 				controllerAs: 'login'
+			}).
+			when('/logout', {
+				templateUrl: 'pages/map/logout.html',
+				controller:	'LogOutCtrl',
+				controllerAs: 'logout'
+			}).
+	    	when('/home', {
+	    		templateUrl: 'pages/main/main.html',
+	    		controller:	'MainCtrl',
+	        	controllerAs: 'main'
+	     	}).
+			when('/map', {
+				templateUrl: 'pages/map/map.html',
+				controller:	'MapCtrl',
+				controllerAs: 'map'
 			}).
 			when('/register', {
 				templateUrl: 'pages/map/register.html',
 				controller:	'RegisterCtrl',
 				controllerAs: 'reg'
 			}).
-	         otherwise({
-	           redirectTo: '/'
-	         });
+	    	otherwise({
+	    		redirectTo: '/login'
+			});
     }
     
 })();

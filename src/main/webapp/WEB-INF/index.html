@@ -24,12 +24,13 @@
       <h1>Google Maps</h1>
     </div>
     <!---logo ends here -->
-    <div class="menu">
+    <div class="menu" ng-controller="MenuController as menu">
       <ul>
-        <li><a href="#/">Home</a></li>
-        <li><a class="active" href="/mApp/#/map">Map</a></li>
+        <li><a href="#/home">Home</a></li>
+        <li><a href="/mApp/#/map">Map</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="/mApp/#/login">Login</a></li>
+        <li ng-if="!$storage.user.name"><a href="/mApp/#/login">Login</a></li>
+        <li ng-if="$storage.user.name"><a href="/mApp/#/">Logout</a></li>
       </ul>
     </div>
     <!--- menu ends here -->

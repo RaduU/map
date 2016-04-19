@@ -8,7 +8,9 @@
 			'ngRoute',
 			'ngSanitize',
 			'mgcrea.ngStrap',
-			'uiGmapgoogle-maps'
+			'uiGmapgoogle-maps',
+			'angular-md5',
+			'ngStorage'
 		]);
 
 	/* Common application conroller */
@@ -49,15 +51,99 @@
 
     angular
         .module('app')
-        .controller('InsertedCtrl', InsertedCtrl);
+        .controller('LogInCtrl', LogInCtrl);
 
-    InsertedCtrl.$inject = ['$scope'];
-    function InsertedCtrl($scope) {
+    LogInCtrl.$inject = ['$scope', '$location', '$localStorage', 'MainService', 'md5'];
+    function LogInCtrl($scope, $location, $localStorage, MainService, md5) {
 
         var vm = this;
 
-    }
+        // Fields
+        $scope.$storage = $localStorage;
+        vm.userName = "";
+        vm.password = "";
+        vm.message = "";
+        vm.cssClass = "";
 
+        //Methods
+        vm.login = login;
+
+        function login() {
+            var isValid = true;
+            if(vm.userName === null || vm.userName === "") {
+                isValid = false;
+            }
+
+            if(vm.password === null || vm.password === "") {
+                isValid = false;
+            }
+
+            if(!isValid) {
+                return;
+            }
+
+            var authenticateData = {};
+            authenticateData.userName = vm.userName;
+            authenticateData.password = md5.createHash(vm.password);
+
+            MainService
+                .authenticate(authenticateData)
+                .then(onAuthenticateComplete, onAuthenticateError);
+        }
+
+        function onAuthenticateComplete(response) {
+            if(response === null || response === "") {
+                vm.message = "Credentialele nu corespund!";
+                vm.cssClass = "error";
+                return;
+            }
+
+            $scope.$storage.user = response;
+
+            vm.message = "Salut " + $scope.$storage.user.name + " !";
+            vm.cssClass = "";
+
+            if(typeof $scope.$storage.user !== 'undefined' && typeof $scope.$storage.user.name !== 'undefined' && $scope.$storage.user.name !== null) {
+                $location.path("/home");
+            }
+        }
+
+        function onAuthenticateError(response) {
+            vm.message = "Credentialele nu corespund!";
+            vm.cssClass = "error";
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('LogInCtrl', LogInCtrl);
+
+    LogInCtrl.$inject = ['$scope', '$location', '$localStorage'];
+    function LogInCtrl($scope, $location, $localStorage) {
+
+        var vm = this;
+
+        // Fields
+        $scope.$storage = $localStorage;
+
+        //Methods
+        vm.logout = logout;
+
+        activate();
+
+        function activate() {
+            logout();
+        }
+
+        function logout() {
+            if(typeof $scope.$storage.user === 'undefined' || typeof $scope.$storage.user.name === 'undefined' || $scope.$storage.user.name === null) {
+                $location.path("/logout");
+            }
+        }
+    }
 })();
 (function() {
 	'use strict';
@@ -66,10 +152,11 @@
 		.module('app')
 		.controller('MainCtrl', MainCtrl);
 
-	MainCtrl.$inject = ['$window', 'MainService'];
-	function MainCtrl($window, MainService) {
+	MainCtrl.$inject = ['$scope', '$localStorage'];
+	function MainCtrl($scope, $localStorage) {
 
 		var vm = this;
+		$scope.$storage = $localStorage;
 
 		vm.viewLocation = 'webapp/templates/main/main.html';
 
@@ -84,15 +171,19 @@
         .module('app')
         .controller('MapCtrl', MapCtrl);
 
-    MapCtrl.$inject = ['$scope', 'MainService'];
-    function MapCtrl($scope, MainService) {
+    MapCtrl.$inject = ['$scope', '$location', '$localStorage', 'MainService'];
+    function MapCtrl($scope, $location, $localStorage, MainService) {
 
         var vm = this;
 
         //Constants
 
         //Fields
-        vm.center = {};
+        $scope.$storage = $localStorage;
+        vm.center = {
+            latitude: 44.435730,
+            longitude: 26.048109
+        };
         vm.zoom = 15;
         vm.marker = {};
         vm.events = {
@@ -100,18 +191,21 @@
                 var e = originalEventArgs[0];
                 vm.marker.coords = {latitude: e.latLng.lat(), longitude: e.latLng.lng()};
                 vm.markers.push({latitude: e.latLng.lat(), longitude: e.latLng.lng()});
+                var attributes = {};
+                attributes.marker = {latitude: e.latLng.lat(), longitude: e.latLng.lng()};
+                attributes.canDelete = true;
+                vm.markersAttributes.push(attributes);
                 $scope.$apply();
             }
         };
 
-        vm.markers = [
-             {
-                 latitude: 44.435730,
-                 longitude: 26.048109
-             }
-         ];
+        vm.markers = [];
+        vm.markersAttributes = [];
+
+        vm.markerDetails = {};
 
         vm.message = "";
+        vm.cssClass = "ok";
 
         //Methods
         vm.addCoordinates = addCoordinates;
@@ -119,33 +213,88 @@
         activate();
 
         function activate() {
-            vm.center = {
-                latitude: 44.435730,
-                longitude: 26.048109
-            };
-
-            vm.marker = {
-                coords: {
+            if(typeof $scope.$storage.user === 'undefined' || typeof $scope.$storage.user.name === 'undefined' || $scope.$storage.user.name === null) {
+                $location.path("/login");
+            } else {
+                vm.center = {
                     latitude: 44.435730,
                     longitude: 26.048109
-                },
-                key: 1,
-                events: {
-                    rightclick : function (gMarker, eventName, model) {
-                        //window.alert("Marker: lat: " + model.coords.latitude + ", lon: " + model.coords.longitude + " clicked!!")
-                        removeMarker(model.coords.latitude, model.coords.longitude);
-                        $scope.$apply();
-                    }
-                }
-            };
+                };
 
-            vm.zoom = 15;
+                vm.marker = {
+                    coords: {
+                        latitude: 44.435730,
+                        longitude: 26.048109
+                    },
+                    name: '',
+                    description: '',
+                    city: '',
+
+                    key: 1,
+                    events: {
+                        click: function (gMarker, eventName, model) {
+                              console.debug('mouseover');
+                              vm.markerDetails = {};
+                              vm.markerDetails = getMarkerDetails(model.coords);
+                              model.doShow = true;
+    //                          $scope.$apply();
+                        },
+                        rightclick : function (gMarker, eventName, model) {
+                            //window.alert("Marker: lat: " + model.coords.latitude + ", lon: " + model.coords.longitude + " clicked!!")
+                            removeMarker(model.coords.latitude, model.coords.longitude);
+                            $scope.$apply();
+                        }
+                    }
+                };
+
+                vm.zoom = 15;
+
+                MainService
+                    .getAllCoordinates()
+                    .then(onLoadComplete, onLoadError);
+            }
+        }
+
+        function onLoadComplete (response) {
+            if(response.length > 0) {
+                var marker = {};
+                var attributes = {};
+                for (var i = 0; i < response.length; i++) {
+                    marker = {};
+                    attributes = {};
+                    marker.latitude = response[i].latitude;
+                    marker.longitude = response[i].longitude;
+                    vm.markers.push(marker);
+
+                    attributes.marker = response[i];
+                    attributes.canDelete = false;
+                    vm.markersAttributes.push(attributes);
+                }
+            } else {
+                vm.markers = [
+                    {
+                        latitude: 44.435730,
+                        longitude: 26.048109
+                    }
+                ];
+                var attributes = {};
+                attributes.marker = vm.markers[0];
+                attributes.canDelete = true;
+                vm.markersAttributes.push(attributes);
+            }
+        }
+
+        function onLoadError(response) {
+
         }
 
         function addCoordinates() {
             var coordiates = {};
             coordiates.latitude =  vm.marker.coords.latitude;
             coordiates.longitude = vm.marker.coords.longitude;
+            coordiates.name = vm.marker.name;
+            coordiates.description = vm.marker.description;
+            coordiates.city = vm.marker.city;
 
             MainService
                 .addCoordinates(coordiates)
@@ -153,11 +302,13 @@
         }
 
         function onAddComplete(response) {
-            vm.message = response;
+            vm.message = "Datele au fost salvate cu succes in baza de date!";
+            vm.cssClass = "ok";
         }
 
         function onAddError() {
-            vm.message = "error";
+            vm.message = "A aparut o eroare la salvarea datelor in baza de date!";
+            vm.cssClass = "error";
         }
 
         function removeMarker(latitude, longitude) {
@@ -168,9 +319,122 @@
                 }
             }
 
-            if(index != -1) {
+            if(index != -1 && vm.markersAttributes[index].canDelete) {
                 vm.markers.splice(index, 1);
+                vm.markersAttributes.splice(index, 1);
             }
+        }
+
+        function getMarkerDetails(coordinates) {
+            var latitude = coordinates.latitude;
+            var longitude = coordinates.longitude;
+            for(var i = 0; i < vm.markersAttributes.length; i++) {
+                if(vm.markersAttributes[i].marker.latitude === latitude && vm.markersAttributes[i].marker.longitude === longitude) {
+                    return vm.markersAttributes[i];
+                }
+            }
+            return null;
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('MenuController', MenuController);
+
+    MenuController.$inject = ['$scope', '$localStorage'];
+    function MenuController($scope, $localStorage) {
+
+        var vm = this;
+        $scope.$storage = $localStorage;
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('RegisterCtrl', RegisterCtrl);
+
+    RegisterCtrl.$inject = ['$scope', '$localStorage', 'MainService', 'md5'];
+    function RegisterCtrl($scope, $localStorage, MainService, md5) {
+
+        var vm = this;
+
+        // Fields
+        $scope.$storage = $localStorage;
+        vm.form = {};
+        vm.form.email = "";
+        vm.form.name = "";
+        vm.form.userName = "";
+        vm.form.password = "";
+        vm.form.age = "";
+        vm.form.sex = "";
+
+        vm.message = "";
+        vm.cssClass = "";
+
+        //Methods
+        vm.register = register;
+
+        activate();
+
+        function activate() {
+            resetForm();
+        }
+
+        function resetForm() {
+            vm.form.email = "";
+            vm.form.name = "";
+            vm.form.userName = "";
+            vm.form.password = "";
+            vm.form.age = "";
+            vm.form.sex = "";
+        }
+
+        function register() {
+            var isValid = true;
+            if(vm.form.email === null || vm.form.email === "") {
+                isValid = false;
+            }
+            if(vm.form.name === null || vm.form.name === "") {
+                isValid = false;
+            }
+            if(vm.form.userName === null || vm.form.userName === "") {
+                isValid = false;
+            }
+            if(vm.form.password === null || vm.form.password === "") {
+                isValid = false;
+            }
+            if(vm.form.age === null || vm.form.age === "") {
+                isValid = false;
+            }
+            if(vm.form.sex === null || vm.form.sex === "") {
+                isValid = false;
+            }
+
+            if(!isValid) {
+                return;
+            }
+
+            vm.form.password = md5.createHash(vm.form.password);
+
+            MainService
+                .addUser(vm.form)
+                .then(onAddComplete, onAddError);
+        }
+
+        function onAddComplete(response) {
+            vm.message = "Utilizatorul a fost adaugat cu succes!";
+            vm.cssClass = "ok";
+        }
+
+        function onAddError() {
+            vm.message = "A aparut o eroare la salvarea utilizatorului!";
+            vm.cssClass = "error";
         }
     }
 })();
@@ -185,11 +449,26 @@
 	function MainService($http, $q, $location) {
 
 		var service = {
-			addCoordinates: addCoordinates
+			addCoordinates: addCoordinates,
+			getAllCoordinates: getAllCoordinates,
+			authenticate: authenticate,
+			addUser: addUser
 		};
 
 		function addCoordinates(data) {
-			return handleRequest('/insert', data);
+			return handleRequest('/coordinates/insert', data);
+		}
+
+		function getAllCoordinates() {
+			return handleRequest('/coordinates/all');
+		}
+
+		function authenticate(data) {
+			return handleRequest('/user/authenticate', data);
+		}
+
+		function addUser(data) {
+			return handleRequest('/user/insert', data);
 		}
 
 		function handleRequest(url, data) {
@@ -233,24 +512,29 @@
     function Routes($routeProvider) {
 
     	$routeProvider.
-	    	 when('/', {
-	    	   templateUrl: 'pages/main/main.html',
-	    	   controller:	'MainCtrl',
-	           controllerAs: 'main'
-	       	 }).
+			when('/login', {
+				templateUrl: 'pages/map/login.html',
+				controller:	'LogInCtrl',
+				controllerAs: 'login'
+			}).
+	    	when('/home', {
+	    		templateUrl: 'pages/main/main.html',
+	    		controller:	'MainCtrl',
+	        	controllerAs: 'main'
+	     	}).
 			when('/map', {
 				templateUrl: 'pages/map/map.html',
 				controller:	'MapCtrl',
 				controllerAs: 'map'
 			}).
-			when('/inserted', {
-				templateUrl: 'pages/map/inserted.html',
-				controller:	'InsertedCtrl',
-				controllerAs: 'added'
+			when('/register', {
+				templateUrl: 'pages/map/register.html',
+				controller:	'RegisterCtrl',
+				controllerAs: 'reg'
 			}).
-	         otherwise({
-	           redirectTo: '/'
-	         });
+	    	otherwise({
+	    		redirectTo: '/login'
+			});
     }
     
 })();

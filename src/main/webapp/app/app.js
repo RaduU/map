@@ -8,7 +8,9 @@
 			'ngRoute',
 			'ngSanitize',
 			'mgcrea.ngStrap',
-			'uiGmapgoogle-maps'
+			'uiGmapgoogle-maps',
+			'angular-md5',
+			'ngStorage'
 		]);
 
 	/* Common application conroller */

@@ -75,7 +75,7 @@ a {
 	width:100%;
 	height:90px;
 }
-.menu li a.active {
+.menu li a:active {
 	background:url(../images/bg-1.jpg) repeat-x;
 	font-size:15px;
 	font-weight:bold;
@@ -121,8 +121,7 @@ a {
 }
 .content-1 h1 {
 	font-size:25px;
-	font-w
-	color:#41403b;
+	font-color:#41403b;
 	padding-bottom:20px;
 }
 .content-1-image {

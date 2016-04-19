@@ -39,6 +39,10 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="coordinatesDAO" class="com.map.app.DAO.Impl.CoordinatesDAOImpl" />
+	<bean id="statusDAO" class="com.map.app.DAO.Impl.StatusDAOImpl" />
+	<bean id="userDAO" class="com.map.app.DAO.Impl.UserDAOImpl" />
 
 	<bean id="coordinatesService" class="com.map.app.service.Impl.CoordinatesServiceImpl" />
+	<bean id="statusService" class="com.map.app.service.Impl.StatusServiceImpl" />
+	<bean id="userService" class="com.map.app.service.Impl.UserServiceImpl" />
 </beans>
