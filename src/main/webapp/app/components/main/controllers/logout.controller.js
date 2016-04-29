@@ -23,11 +23,10 @@
         }
 
         function logout() {
-            //$scope.$storage.user = null;
-
-            if(!commonService.isUserLogged()) {
-                $location.path("/logout");
+            if(commonService.isUserLogged()) {
+                commonService.logOut();
             }
+            $location.path("/login");
         }
     }
 })();

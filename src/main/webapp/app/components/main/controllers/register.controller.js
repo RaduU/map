@@ -5,8 +5,8 @@
         .module('app')
         .controller('RegisterCtrl', RegisterCtrl);
 
-    RegisterCtrl.$inject = ['$scope', '$localStorage', 'MainService', 'md5'];
-    function RegisterCtrl($scope, $localStorage, MainService, md5) {
+    RegisterCtrl.$inject = ['$scope', '$localStorage', 'MainService', 'md5', '$location', '$timeout'];
+    function RegisterCtrl($scope, $localStorage, MainService, md5, $location, $timeout) {
 
         var vm = this;
 
@@ -76,11 +76,19 @@
         function onAddComplete(response) {
             vm.message = "Utilizatorul a fost adaugat cu succes!";
             vm.cssClass = "ok";
+
+            resetForm();
+
+            $timeout(gotoLogin, 4000);
         }
 
         function onAddError() {
             vm.message = "A aparut o eroare la salvarea utilizatorului!";
             vm.cssClass = "error";
+        }
+
+        function gotoLogin() {
+            $location.path("/login");
         }
     }
 })();

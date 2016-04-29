@@ -24,7 +24,7 @@ public class UserController {
     public User insert(@RequestBody User user) {
         try {
             User newUser = user;
-            Status status = statusService.getStatusById(2);
+            Status status = statusService.getStatusById(1);
             newUser.setStatus(status);
             userService.insertUser(newUser);
         } catch (Error e) {

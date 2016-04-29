@@ -349,7 +349,7 @@ color:#41403b;
 
 .register-background {
 	width:240px;
-	height:175px;
+	height:183px;
 	padding:10px;
 	background:#d0d0c5;
 	margin-top:60px;
@@ -357,4 +357,32 @@ color:#41403b;
 }
 a.createLink {
 	text-decoration: underline;
+}
+
+.welcomeText {
+    font-size: 16px;
+    color: #0000ff;
+}
+
+.boldText {
+    font-weight:bold;
+}
+
+.homeContainer {
+    width: 600px;
+    margin:0 auto;
+    padding-top: 10px;
+}
+
+.homeText {
+    font-size: 16px;
+    padding: 10px 7px;
+}
+
+.homePicture {
+	background-image: url("../images/maps.jpg");
+	width: 600px;
+	height: 450px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
