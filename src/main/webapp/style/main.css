@@ -32,7 +32,9 @@ a {
 }
 .logo {
 	width:380px;
-	float:left;
+	height:180px;
+    float:left;
+    background:url(../images/logo.jpg);
 }
 .logo h1 {
 	font-size:40px;

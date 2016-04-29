@@ -160,7 +160,7 @@
         }
 
         function logout() {
-            $scope.$storage.user = null;
+            //$scope.$storage.user = null;
 
             if(!commonService.isUserLogged()) {
                 $location.path("/logout");
