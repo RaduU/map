@@ -278,22 +278,31 @@
 
                 vm.zoom = 15;
 
-                MainService
-                    .getAllCoordinates()
-                    .then(onLoadComplete, onLoadError);
+                getTheData();
             }
         }
 
+           function getTheData(){
+            MainService
+               .getAllCoordinates()
+               .then(onLoadComplete, onLoadError);
+
+           }
+
+
         function onLoadComplete (response) {
+            vm.markers = [];
+            vm.markersAttributes = [];
             if(response.length > 0) {
                 var marker = {};
                 var attributes = {};
                 for (var i = 0; i < response.length; i++) {
                     marker = {};
                     attributes = {};
-                    marker.latitude = response[i].latitude;
-                    marker.longitude = response[i].longitude;
-                    vm.markers.push(marker);
+//                    marker.latitude = response[i].latitude;
+//                    marker.longitude = response[i].longitude;
+
+                    vm.markers.push(response[i]);
 
                     attributes.marker = response[i];
                     attributes.canDelete = false;
@@ -333,6 +342,7 @@
         function onAddComplete(response) {
             vm.message = "Datele au fost salvate cu succes in baza de date!";
             vm.cssClass = "ok";
+            getTheData();
         }
 
         function onAddError() {
